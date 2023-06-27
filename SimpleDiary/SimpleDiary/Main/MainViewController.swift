@@ -10,6 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
 
     @IBOutlet weak var writeButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,5 +30,24 @@ private extension MainViewController {
 
         guard let pushVC = storyboard.instantiateViewController(withIdentifier: "WriteViewController") as? WriteViewController else { return }
         self.navigationController?.pushViewController(pushVC, animated: true)
+    }
+
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // TODO: model에 데이터 개수만큼 cell 반환
+        5
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath)
+        // TODO: model에 데이터가 있는 cell 반환
+        return cell
     }
 }

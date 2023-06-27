@@ -40,12 +40,20 @@
                                             <constraint firstAttribute="bottom" secondItem="YyC-iM-J2t" secondAttribute="bottom" id="XGL-sX-0fv"/>
                                         </constraints>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PaU-xa-9ls">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="709"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="wKR-gj-XRz" secondAttribute="trailing" id="D6u-TU-Nq9"/>
+                                    <constraint firstItem="PaU-xa-9ls" firstAttribute="top" secondItem="wKR-gj-XRz" secondAttribute="bottom" id="Fj2-3X-FVu"/>
                                     <constraint firstItem="wKR-gj-XRz" firstAttribute="leading" secondItem="3Z3-Ny-aj0" secondAttribute="leading" id="TD1-0p-4zi"/>
                                     <constraint firstItem="wKR-gj-XRz" firstAttribute="top" secondItem="3Z3-Ny-aj0" secondAttribute="top" id="VOg-ol-fgo"/>
+                                    <constraint firstAttribute="trailing" secondItem="PaU-xa-9ls" secondAttribute="trailing" id="kR4-GQ-yc2"/>
+                                    <constraint firstItem="PaU-xa-9ls" firstAttribute="leading" secondItem="3Z3-Ny-aj0" secondAttribute="leading" id="n0c-vb-T5F"/>
+                                    <constraint firstAttribute="bottom" secondItem="PaU-xa-9ls" secondAttribute="bottom" id="ula-kK-Vqy"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -60,6 +68,7 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Ac5-xo-E9q"/>
                     <connections>
+                        <outlet property="tableView" destination="PaU-xa-9ls" id="iyH-1r-DHV"/>
                         <outlet property="writeButton" destination="YyC-iM-J2t" id="Uoq-3a-qFm"/>
                     </connections>
                 </viewController>

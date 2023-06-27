@@ -19,6 +19,8 @@
 		1892968A2A4AD68A0090AE5A /* DiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 189296882A4AD68A0090AE5A /* DiaryModel.xcdatamodeld */; };
 		189296912A4AE0AA0090AE5A /* DiaryModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892968F2A4AE0AA0090AE5A /* DiaryModel+CoreDataClass.swift */; };
 		189296922A4AE0AA0090AE5A /* DiaryModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189296902A4AE0AA0090AE5A /* DiaryModel+CoreDataProperties.swift */; };
+		189296972A4AEADE0090AE5A /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189296952A4AEADE0090AE5A /* DailyTableViewCell.swift */; };
+		189296982A4AEADE0090AE5A /* DailyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189296962A4AEADE0090AE5A /* DailyTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		189296892A4AD68A0090AE5A /* DiaryModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiaryModel.xcdatamodel; sourceTree = "<group>"; };
 		1892968F2A4AE0AA0090AE5A /* DiaryModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		189296902A4AE0AA0090AE5A /* DiaryModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		189296952A4AEADE0090AE5A /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
+		189296962A4AEADE0090AE5A /* DailyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 		1892967B2A4AB1830090AE5A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				189296942A4AEAC30090AE5A /* Cell */,
 				189296672A4AAD530090AE5A /* MainViewController.swift */,
 				189296692A4AAD530090AE5A /* Main.storyboard */,
 			);
@@ -108,6 +113,15 @@
 			);
 			name = Data;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		189296942A4AEAC30090AE5A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				189296952A4AEADE0090AE5A /* DailyTableViewCell.swift */,
+				189296962A4AEADE0090AE5A /* DailyTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +187,7 @@
 				1892967A2A4AAE330090AE5A /* gitignore in Resources */,
 				1892966D2A4AAD530090AE5A /* Assets.xcassets in Resources */,
 				1892966B2A4AAD530090AE5A /* Main.storyboard in Resources */,
+				189296982A4AEADE0090AE5A /* DailyTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				189296682A4AAD530090AE5A /* MainViewController.swift in Sources */,
+				189296972A4AEADE0090AE5A /* DailyTableViewCell.swift in Sources */,
 				189296912A4AE0AA0090AE5A /* DiaryModel+CoreDataClass.swift in Sources */,
 				189296642A4AAD530090AE5A /* AppDelegate.swift in Sources */,
 				1892968A2A4AD68A0090AE5A /* DiaryModel.xcdatamodeld in Sources */,
