@@ -72,8 +72,6 @@ private extension WriteViewController {
     }
 
     @objc func saveTapped(_ sender: UIButton) {
-
-        self.saveCoreData(title: titleText, content: contentText)
         navigationController?.popViewController(animated: true)
     }
 
