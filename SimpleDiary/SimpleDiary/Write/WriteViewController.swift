@@ -18,11 +18,18 @@ final class WriteViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
 
+    let diaryManager = DiaryDataManager.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
         setButton()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+
+        self.view.endEditing(true)
     }
 }
 
@@ -69,14 +76,15 @@ private extension WriteViewController {
     }
 
     @objc func saveTapped(_ sender: UIButton) {
-
-        // TODO: 데이터 저장 후 pop
-        saveCoreData(title: titleLabel.text ?? "", content: contentLabel.text ?? "") {
-            print("저장 후 pop")
+        diaryManager.saveDiaryData(title: titleTextField.text ?? "", content: contentTextView.text, date: Date()) {
             self.navigationController?.popViewController(animated: true)
         }
+//        saveCoreData(title: titleLabel.text ?? "", content: contentLabel.text ?? "") {
+//            print("저장 후 pop")
+//            self.navigationController?.popViewController(animated: true)
+//        }
     }
-
+    /**
     func saveCoreData(title: String, content: String, completion: @escaping () -> ()) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
 
@@ -117,7 +125,7 @@ private extension WriteViewController {
             print("Could not save. \(error), \(error.userInfo)")
             throw error
         }
-    }
+    }*/
 }
 
 extension WriteViewController: UITextViewDelegate {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181A107A2A4BFAF40052CD4B /* DiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A10792A4BFAF40052CD4B /* DiaryDataManager.swift */; };
 		189296642A4AAD530090AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189296632A4AAD530090AE5A /* AppDelegate.swift */; };
 		189296662A4AAD530090AE5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189296652A4AAD530090AE5A /* SceneDelegate.swift */; };
 		189296682A4AAD530090AE5A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189296672A4AAD530090AE5A /* MainViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181A10792A4BFAF40052CD4B /* DiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDataManager.swift; sourceTree = "<group>"; };
 		189296602A4AAD530090AE5A /* SimpleDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		189296632A4AAD530090AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		189296652A4AAD530090AE5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				1892968F2A4AE0AA0090AE5A /* DiaryModel+CoreDataClass.swift */,
 				189296902A4AE0AA0090AE5A /* DiaryModel+CoreDataProperties.swift */,
+				181A10792A4BFAF40052CD4B /* DiaryDataManager.swift */,
 			);
 			name = Data;
 			path = ..;
@@ -198,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181A107A2A4BFAF40052CD4B /* DiaryDataManager.swift in Sources */,
 				189296682A4AAD530090AE5A /* MainViewController.swift in Sources */,
 				189296972A4AEADE0090AE5A /* DailyTableViewCell.swift in Sources */,
 				189296912A4AE0AA0090AE5A /* DiaryModel+CoreDataClass.swift in Sources */,
