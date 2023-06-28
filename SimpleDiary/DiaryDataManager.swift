@@ -53,6 +53,8 @@ class DiaryDataManager {
 
         if let context = context {
             let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+            let date = NSSortDescriptor(key: "date", ascending: false)
+            request.sortDescriptors = [date]
 
             do {
                 if let resultDiaryList = try context.fetch(request) as? [DiaryModel] {

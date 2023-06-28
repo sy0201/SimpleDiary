@@ -21,6 +21,7 @@ final class WriteViewController: UIViewController {
     var originalButtonFrame: CGRect?
 
     let diaryManager = DiaryDataManager.shared
+    var diaryData: DiaryModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,8 @@ private extension WriteViewController {
         saveButton.setTitle("저장", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .blue
+        saveButton.clipsToBounds = true
+        saveButton.layer.cornerRadius = 8
     }
 
     func setButton() {
@@ -79,9 +82,12 @@ private extension WriteViewController {
     }
 
     @objc func saveTapped(_ sender: UIButton) {
-        diaryManager.saveDiaryData(title: titleTextField.text ?? "", content: contentTextView.text, date: Date()) {
+        let titleText = titleTextField.text ?? ""
+        let contentText = contentTextView.text ?? ""
+
+        diaryManager.saveDiaryData(title: titleText, content: contentText, date: Date(), completion: {
             self.navigationController?.popViewController(animated: true)
-        }
+        })
     }
 
     func setKeyboardObserver() {

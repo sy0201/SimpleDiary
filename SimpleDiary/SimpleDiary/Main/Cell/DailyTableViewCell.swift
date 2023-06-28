@@ -7,12 +7,13 @@
 
 import UIKit
 
-class DailyTableViewCell: UITableViewCell {
+final class DailyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
 
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -21,6 +22,9 @@ class DailyTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
+}
+
+private extension DailyTableViewCell {
 
     func setDailyCell(_ data: DiaryModel) {
 

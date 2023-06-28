@@ -12,6 +12,8 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var writeButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
 
+    let diaryManager = DiaryDataManager.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
