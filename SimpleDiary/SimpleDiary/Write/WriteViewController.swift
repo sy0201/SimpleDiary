@@ -18,9 +18,6 @@ final class WriteViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
 
-    var titleText: String = ""
-    var contentText: String = ""
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,11 +69,15 @@ private extension WriteViewController {
     }
 
     @objc func saveTapped(_ sender: UIButton) {
+
         // TODO: 데이터 저장 후 pop
-        navigationController?.popViewController(animated: true)
+        saveCoreData(title: titleLabel.text ?? "", content: contentLabel.text ?? "") {
+            print("저장 후 pop")
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
-    func saveCoreData(title: String, content: String) -> Bool {
+    func saveCoreData(title: String, content: String, completion: @escaping () -> ()) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
 
         let newDiaryContext = appDelegate.persistentContainer.viewContext
@@ -91,7 +92,9 @@ private extension WriteViewController {
 
         do {
             // data 저장
+            print("data 저장")
             try newDiaryContext.save()
+            completion()
             return true
         } catch let error as NSError {
             // 에러 발생시
