@@ -18,6 +18,8 @@ final class WriteViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
 
+    var originalButtonFrame: CGRect?
+
     let diaryManager = DiaryDataManager.shared
 
     override func viewDidLoad() {
@@ -25,6 +27,7 @@ final class WriteViewController: UIViewController {
 
         setupView()
         setButton()
+        setKeyboardObserver()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -36,13 +39,13 @@ final class WriteViewController: UIViewController {
 private extension WriteViewController {
 
     func setupView() {
-//        print("saveResult:", saveCoreData(title: "일기제목저장", content: "일기내용저장~~"))
-//        do {
-//            let array: [NSManagedObject] = try readCoreData()!
-//            print(array)
-//        } catch {
-//            print(error)
-//        }
+        //        print("saveResult:", saveCoreData(title: "일기제목저장", content: "일기내용저장~~"))
+        //        do {
+        //            let array: [NSManagedObject] = try readCoreData()!
+        //            print(array)
+        //        } catch {
+        //            print(error)
+        //        }
         titleLabel.font = .systemFont(ofSize: 15)
         titleLabel.textColor = .black
         titleLabel.text = "제목"
@@ -67,8 +70,8 @@ private extension WriteViewController {
         dateTitle.text = "날짜를 선택해주세요."
 
         saveButton.setTitle("저장", for: .normal)
-        saveButton.setTitleColor(.black, for: .normal)
-        saveButton.backgroundColor = .gray
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.backgroundColor = .blue
     }
 
     func setButton() {
@@ -79,53 +82,49 @@ private extension WriteViewController {
         diaryManager.saveDiaryData(title: titleTextField.text ?? "", content: contentTextView.text, date: Date()) {
             self.navigationController?.popViewController(animated: true)
         }
-//        saveCoreData(title: titleLabel.text ?? "", content: contentLabel.text ?? "") {
-//            print("저장 후 pop")
-//            self.navigationController?.popViewController(animated: true)
-//        }
     }
-    /**
-    func saveCoreData(title: String, content: String, completion: @escaping () -> ()) -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
 
-        let newDiaryContext = appDelegate.persistentContainer.viewContext
+    func setKeyboardObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
 
-        let entity = NSEntityDescription.entity(forEntityName: "DiaryModel", in: newDiaryContext)!
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
 
-        let object = NSManagedObject(entity: entity, insertInto: newDiaryContext)
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
 
-        object.setValue(title, forKey: "title")
-        object.setValue(content, forKey: "content")
-        object.setValue(Date(), forKey: "date")
+            if originalButtonFrame == nil {
+                originalButtonFrame = saveButton.frame
+            }
 
-        do {
-            // data 저장
-            print("data 저장")
-            try newDiaryContext.save()
-            completion()
-            return true
-        } catch let error as NSError {
-            // 에러 발생시
-            print("Could not save. \(error), \(error.userInfo)")
-            return false
+            let newY = UIScreen.main.bounds.height - keyboardHeight - saveButton.frame.size.height - 60
+            let newButtonFrame = CGRect(x: saveButton.frame.origin.x, y: newY, width: saveButton.frame.size.width, height: saveButton.frame.size.height)
+
+            UIView.animate(withDuration: 0.3) {
+                self.saveButton.frame = newButtonFrame
+            }
         }
     }
 
-    func readCoreData() throws -> [NSManagedObject]? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        let newDiaryContext = appDelegate.persistentContainer.viewContext
-
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DiaryModel")
-
-        do {
-            // fetchRequest를 통해 newDiaryContext로부터 결과 배열을 가져오기
-            let resultCDArray = try newDiaryContext.fetch(fetchRequest)
-            return resultCDArray
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-            throw error
+    @objc func keyboardWillHide(_ notification: Notification) {
+        if let originalFrame = originalButtonFrame {
+            UIView.animate(withDuration: 0.3) {
+                self.saveButton.frame = originalFrame
+            }
+            originalButtonFrame = nil
         }
-    }*/
+    }
 }
 
 extension WriteViewController: UITextViewDelegate {
