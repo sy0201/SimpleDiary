@@ -18,6 +18,12 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
 
         setButton()
+        setupTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 }
 
@@ -37,19 +43,26 @@ private extension MainViewController {
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "DailyTableViewCell", bundle: nil), forCellReuseIdentifier: "DailyTableViewCell")
     }
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: model에 데이터 개수만큼 cell 반환
-        5
+        diaryManager.readDiaryData().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath)
-        // TODO: model에 데이터가 있는 cell 반환
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath) as? DailyTableViewCell else { return UITableViewCell() }
+
+        let diaryData = diaryManager.readDiaryData()
+        cell.diaryData = diaryData[indexPath.row]
+
         return cell
     }
+}
+
+extension MainViewController: UITableViewDelegate {
+
 }

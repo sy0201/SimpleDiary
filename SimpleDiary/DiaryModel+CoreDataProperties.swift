@@ -20,6 +20,14 @@ extension DiaryModel {
     @NSManaged public var content: String?
     @NSManaged public var date: Date?
 
+    var dateString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = self.date else { return ""}
+        let savedDateString = dateFormatter.string(from: date)
+        return savedDateString
+    }
 }
 
 extension DiaryModel : Identifiable {
