@@ -10,6 +10,7 @@ import CoreData
 
 final class EditViewController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentLabel: UILabel!
@@ -82,9 +83,15 @@ private extension EditViewController {
     }
 
     func setButton() {
+        backButton.addTarget(self, action: #selector(backTapped(_:)), for: .touchUpInside)
+
         deleteButton.addTarget(self, action: #selector(deleteTapped(_:)), for: .touchUpInside)
 
         editButton.addTarget(self, action: #selector(editTapped(_ :)), for: .touchUpInside)
+    }
+
+    @objc func backTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc func deleteTapped(_ sender: UIButton) {

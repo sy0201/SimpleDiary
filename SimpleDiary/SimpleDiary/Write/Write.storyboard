@@ -20,8 +20,28 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVn-ds-0ql">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEI-fN-TbY">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuG-v6-EDx">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="AWi-UP-Bla"/>
+                                                    <constraint firstAttribute="height" constant="50" id="Yfk-mQ-eVt"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="chevron.backward" catalog="system"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="SuG-v6-EDx" firstAttribute="top" secondItem="OEI-fN-TbY" secondAttribute="top" id="KNF-zA-2n4"/>
+                                            <constraint firstAttribute="bottom" secondItem="SuG-v6-EDx" secondAttribute="bottom" id="Lom-CN-mu2"/>
+                                            <constraint firstItem="SuG-v6-EDx" firstAttribute="leading" secondItem="OEI-fN-TbY" secondAttribute="leading" id="NKF-sk-ZPs"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y82-Vg-dAj">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="84.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="49.999999999999993" width="393" height="84.333333333333314"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k3M-Se-Fhu">
                                                 <rect key="frame" x="20" y="20" width="353" height="64.333333333333329"/>
@@ -33,7 +53,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wgs-Th-AW1">
-                                                        <rect key="frame" x="0.0" y="30.333333333333329" width="353" height="34"/>
+                                                        <rect key="frame" x="0.0" y="30.333333333333343" width="353" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -49,7 +69,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0I-8i-n06">
-                                        <rect key="frame" x="0.0" y="84.333333333333329" width="393" height="250.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="134.33333333333331" width="393" height="250.33333333333331"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ETM-vI-cER">
                                                 <rect key="frame" x="20" y="20.000000000000014" width="353" height="230.33333333333337"/>
@@ -82,7 +102,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMh-wj-Skb">
-                                        <rect key="frame" x="0.0" y="334.66666666666669" width="393" height="100.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="384.66666666666669" width="393" height="100.33333333333331"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kn5-Fk-k9y">
                                                 <rect key="frame" x="20" y="20" width="353" height="80.333333333333329"/>
@@ -122,13 +142,16 @@
                                     <constraint firstAttribute="trailing" secondItem="fMT-Xi-zST" secondAttribute="trailing" constant="20" id="ESp-SC-YU8"/>
                                     <constraint firstItem="jMh-wj-Skb" firstAttribute="top" secondItem="z0I-8i-n06" secondAttribute="bottom" id="HcU-Fn-ie6"/>
                                     <constraint firstItem="fMT-Xi-zST" firstAttribute="leading" secondItem="JVn-ds-0ql" secondAttribute="leading" constant="20" id="IkP-nW-RWC"/>
-                                    <constraint firstItem="Y82-Vg-dAj" firstAttribute="top" secondItem="JVn-ds-0ql" secondAttribute="top" id="Tsd-T9-JAY"/>
+                                    <constraint firstAttribute="trailing" secondItem="OEI-fN-TbY" secondAttribute="trailing" id="P2L-m7-ZWE"/>
+                                    <constraint firstItem="Y82-Vg-dAj" firstAttribute="top" secondItem="OEI-fN-TbY" secondAttribute="bottom" id="PJE-yQ-MG1"/>
+                                    <constraint firstItem="OEI-fN-TbY" firstAttribute="leading" secondItem="JVn-ds-0ql" secondAttribute="leading" id="V5F-44-HI8"/>
                                     <constraint firstItem="Y82-Vg-dAj" firstAttribute="leading" secondItem="JVn-ds-0ql" secondAttribute="leading" id="c8m-w5-4df"/>
                                     <constraint firstAttribute="trailing" secondItem="Y82-Vg-dAj" secondAttribute="trailing" id="cLe-Fs-pty"/>
                                     <constraint firstItem="z0I-8i-n06" firstAttribute="top" secondItem="Y82-Vg-dAj" secondAttribute="bottom" id="lbi-as-nSc"/>
                                     <constraint firstAttribute="trailing" secondItem="z0I-8i-n06" secondAttribute="trailing" id="nph-ym-r2Y"/>
                                     <constraint firstAttribute="bottom" secondItem="fMT-Xi-zST" secondAttribute="bottom" constant="20" id="oXz-oD-1jp"/>
                                     <constraint firstItem="z0I-8i-n06" firstAttribute="leading" secondItem="JVn-ds-0ql" secondAttribute="leading" id="tzE-mR-X6e"/>
+                                    <constraint firstItem="OEI-fN-TbY" firstAttribute="top" secondItem="JVn-ds-0ql" secondAttribute="top" id="v7f-Je-twB"/>
                                     <constraint firstItem="jMh-wj-Skb" firstAttribute="leading" secondItem="JVn-ds-0ql" secondAttribute="leading" id="vWE-Hf-AHN"/>
                                 </constraints>
                             </view>
@@ -144,6 +167,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="YY6-lq-B4d"/>
                     <connections>
+                        <outlet property="backButton" destination="SuG-v6-EDx" id="6k8-ZE-GUy"/>
                         <outlet property="contentLabel" destination="OR2-dL-zLJ" id="wQR-Gw-UZA"/>
                         <outlet property="contentTextView" destination="jJb-ey-OVK" id="ypB-wa-2LV"/>
                         <outlet property="datePicker" destination="JZe-9r-dbe" id="Zzi-9b-gXB"/>
@@ -159,6 +183,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
