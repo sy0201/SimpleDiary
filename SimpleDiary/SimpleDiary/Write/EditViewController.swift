@@ -65,8 +65,8 @@ private extension EditViewController {
         contentTextView.layer.cornerRadius = 5
 
         dateTitle.font = .systemFont(ofSize: 15)
-        dateTitle.textColor = .black
-        dateTitle.text = "날짜를 선택해주세요."
+        dateTitle.textColor = .red
+        dateTitle.text = "날짜를 수정해주세요."
 
         deleteButton.setTitle("삭제", for: .normal)
         deleteButton.setTitleColor(.white, for: .normal)
@@ -88,9 +88,13 @@ private extension EditViewController {
     }
 
     @objc func deleteTapped(_ sender: UIButton) {
+        guard let diaryData = diaryData else { return }
 
-//        diaryManager.deleteDiaryData(diaryModel: <#T##DiaryModel#>, completion: <#T##() -> ()#>)
-
+        diaryManager.deleteDiaryData(diaryModel: diaryData) {
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 
     @objc func editTapped(_ sender: UIButton) {
