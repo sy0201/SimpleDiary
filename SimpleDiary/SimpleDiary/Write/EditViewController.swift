@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-final class WriteViewController: UIViewController {
+final class EditViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
@@ -16,7 +16,10 @@ final class WriteViewController: UIViewController {
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var dateTitle: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var saveButton: UIButton!
+
+    @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
 
     var originalButtonFrame: CGRect?
 
@@ -37,23 +40,25 @@ final class WriteViewController: UIViewController {
     }
 }
 
-private extension WriteViewController {
+private extension EditViewController {
 
     func setupView() {
         titleLabel.font = .systemFont(ofSize: 15)
-        titleLabel.textColor = .black
-        titleLabel.text = "제목"
+        titleLabel.textColor = .red
+        titleLabel.text = "제목을 수정해주세요."
 
-        titleTextField.placeholder = "제목을 입력해주세요."
+        if let diarydate = self.diaryData {
+            titleTextField.text = diaryData?.title
+            contentTextView.text = diaryData?.content
+        } else {
+
+        }
 
         contentLabel.font = .systemFont(ofSize: 15)
-        contentLabel.textColor = .black
-        contentLabel.text = "내용"
+        contentLabel.textColor = .red
+        contentLabel.text = "내용을 수정해주세요."
 
         contentTextView.delegate = self
-
-        contentTextView.text = "내용을 입력해주세요."
-        contentTextView.textColor = .gray
 
         contentTextView.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 0.1)
         contentTextView.layer.borderWidth = 1
@@ -63,24 +68,44 @@ private extension WriteViewController {
         dateTitle.textColor = .black
         dateTitle.text = "날짜를 선택해주세요."
 
-        saveButton.setTitle("저장", for: .normal)
-        saveButton.setTitleColor(.white, for: .normal)
-        saveButton.backgroundColor = .blue
-        saveButton.clipsToBounds = true
-        saveButton.layer.cornerRadius = 8
+        deleteButton.setTitle("삭제", for: .normal)
+        deleteButton.setTitleColor(.white, for: .normal)
+        deleteButton.backgroundColor = .lightGray
+        deleteButton.clipsToBounds = true
+        deleteButton.layer.cornerRadius = 8
+
+        editButton.setTitle("수정", for: .normal)
+        editButton.setTitleColor(.white, for: .normal)
+        editButton.backgroundColor = .blue
+        editButton.clipsToBounds = true
+        editButton.layer.cornerRadius = 8
     }
 
     func setButton() {
-        saveButton.addTarget(self, action: #selector(saveTapped(_ :)), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(deleteTapped(_:)), for: .touchUpInside)
+
+        editButton.addTarget(self, action: #selector(editTapped(_ :)), for: .touchUpInside)
     }
 
-    @objc func saveTapped(_ sender: UIButton) {
-        let titleText = titleTextField.text ?? ""
-        let contentText = contentTextView.text ?? ""
+    @objc func deleteTapped(_ sender: UIButton) {
 
-        diaryManager.saveDiaryData(title: titleText, content: contentText, date: Date(), completion: {
-            self.navigationController?.popViewController(animated: true)
-        })
+//        diaryManager.deleteDiaryData(diaryModel: <#T##DiaryModel#>, completion: <#T##() -> ()#>)
+
+    }
+
+    @objc func editTapped(_ sender: UIButton) {
+
+        if let diaryData = self.diaryData {
+            diaryData.title = titleTextField.text
+            diaryData.content = contentTextView.text
+
+            diaryManager.updateDiary(newData: diaryData) {
+                print("수정 완료")
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+
+        }
     }
 
     func setKeyboardObserver() {
@@ -104,14 +129,14 @@ private extension WriteViewController {
             let keyboardHeight = keyboardRectangle.height
 
             if originalButtonFrame == nil {
-                originalButtonFrame = saveButton.frame
+                originalButtonFrame = buttonStackView.frame
             }
 
-            let newY = UIScreen.main.bounds.height - keyboardHeight - saveButton.frame.size.height - 60
-            let newButtonFrame = CGRect(x: saveButton.frame.origin.x, y: newY, width: saveButton.frame.size.width, height: saveButton.frame.size.height)
+            let newY = UIScreen.main.bounds.height - keyboardHeight - buttonStackView.frame.size.height - 60
+            let newButtonFrame = CGRect(x: buttonStackView.frame.origin.x, y: newY, width: buttonStackView.frame.size.width, height: buttonStackView.frame.size.height)
 
             UIView.animate(withDuration: 0.3) {
-                self.saveButton.frame = newButtonFrame
+                self.buttonStackView.frame = newButtonFrame
             }
         }
     }
@@ -119,14 +144,14 @@ private extension WriteViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
         if let originalFrame = originalButtonFrame {
             UIView.animate(withDuration: 0.3) {
-                self.saveButton.frame = originalFrame
+                self.buttonStackView.frame = originalFrame
             }
             originalButtonFrame = nil
         }
     }
 }
 
-extension WriteViewController: UITextViewDelegate {
+extension EditViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard contentTextView.textColor == .gray else { return }
@@ -137,7 +162,7 @@ extension WriteViewController: UITextViewDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if contentTextView.text == "" {
-            contentTextView.text = "내용을 입력해주세요."
+            contentTextView.text = "내용을 수정해주세요."
             contentTextView.textColor = .gray
         }
     }

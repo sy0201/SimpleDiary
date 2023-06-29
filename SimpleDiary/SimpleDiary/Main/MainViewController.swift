@@ -25,6 +25,15 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DailyTableViewCell" {
+            let editVC = segue.destination as? EditViewController
+
+            guard let indexPath = sender as? IndexPath else { return }
+            editVC?.diaryData = diaryManager.readDiaryData()[indexPath.row]
+        }
+    }
 }
 
 private extension MainViewController {
@@ -58,11 +67,16 @@ extension MainViewController: UITableViewDataSource {
 
         let diaryData = diaryManager.readDiaryData()
         cell.diaryData = diaryData[indexPath.row]
-
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
         return cell
     }
 }
 
 extension MainViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRowAt \(indexPath.row)")
+        performSegue(withIdentifier: "DailyTableViewCell", sender: indexPath)
+    }
 }

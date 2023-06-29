@@ -70,7 +70,10 @@ class DiaryDataManager {
     //MARK: - 데이터 삭제
 
     func deleteDiaryData(diaryModel: DiaryModel, completion: @escaping () -> ()) {
-        guard let date = diaryModel.date else { return }
+        guard let date = diaryModel.date else {
+            completion()
+            return
+        }
         // 저장된 데이터가 있는지 확인
         if let context = context {
 
