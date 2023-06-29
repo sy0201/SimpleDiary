@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class DiaryDataManager {
+final class DiaryDataManager {
 
     static let shared: DiaryDataManager = DiaryDataManager()
     private init() {}
